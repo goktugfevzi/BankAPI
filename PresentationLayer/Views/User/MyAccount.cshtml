@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewData["Title"] = "MyAccount";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-lg-9">
+    <h3 class="text-5 font-weight-700 d-flex admin-heading">Personal Profile</h3>
+
+    <!-- Personal Details  -->
+    <div class="bg-light shadow-sm rounded infoItems">
+
+        <a href="#edit-personal-details" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-personal-details"><i class="fas fa-edit mr-1"></i>Güncelle</a>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Adı</p>
+            <p class="col-sm-9">Furkan UĞUR</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Doğum Yılı</p>
+            <p class="col-sm-9">01-12-2000</p>
+        </div>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Adres</p>
+            <p class="col-sm-9">
+                Ankara Pursaklar
+            </p>
+        </div>
+
+        <div id="edit-personal-details" class="accord">
+            <div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-400">Personal Details</h5>
+                        <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="personaldetails" method="post">
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="firstName">Adınız</label>
+                                        <input type="text" value="Furkan" class="form-control" data-bv-field="firstName" id="firstName" required="" placeholder="Adınızı Girin">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="birthDate">Doğum Yılı</label>
+                                        <div class="position-relative">
+                                            <input id="birthDate" value="01-12-2000" type="text" class="form-control" required="" placeholder="Doğum Yılı">
+                                            <span class="icon-inside"><i class="fas fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <h3 class="text-5 font-weight-400 mt-3">Adres</h3>
+                                    <hr>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" value="Ankara Merkez" class="form-control" data-bv-field="address" id="address" required="" placeholder="Adresinizi Girin">
+                                    </div>
+                                </div>                                                            
+                            </div>
+                            <button class="btn btn-primary btn-block mt-2" type="submit">
+                                Güncelle
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Details Modal  -->
+    <!-- Personal Details End -->
+ 
+    <!-- Email Addresses  -->
+    <div class="bg-light shadow-sm rounded infoItems">
+        <a href="#edit-email" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-email"><i class="fas fa-edit mr-1"></i>Güncelle</a>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mail Adresi</p>
+            <p class="col-sm-9">deneme@gmail.com</p>
+        </div>
+        <div id="edit-email" class="accord">
+            <div class="">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-400">Mail Adresi</h5>
+                        <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="emailAddresses" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="emailID">Mail Adresi</label>
+                                        <input type="text" value="deneme@gmail.com" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Mail adresi">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Email Addresses End -->
+    <!-- Phone -->
+    <div class="bg-light shadow-sm rounded infoItems">
+        <a href="#edit-phone" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-phone"><i class="fas fa-edit mr-1"></i>Güncelle</a>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Telefon Numarası</p>
+            <p class="col-sm-9">+90 507 099 41 61</p>
+        </div>
+        <div id="edit-phone" class="accord">
+            <div class="">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-400">Phone</h5>
+                        <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form id="phone" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="mobileNumber">Telefon Numarası</label>
+                                        <input type="text" value="+90 507 099 41 61" class="form-control" data-bv-field="mobilenumber" id="mobileNumber" required="" placeholder="Telefon Numarası">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Güncelle</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Phone End -->
+    <!-- Security -->
+    <div class="bg-light shadow-sm rounded infoItems">
+        <a href="#change-password" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="change-password"><i class="fas fa-edit mr-1"></i>Güncelle</a>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">
+                <label class="col-form-label">Şifre</label>
+            </p>
+            <p class="col-sm-9">
+                <input type="password" class="form-control-plaintext" data-bv-field="password" id="password" value="Şifrenizi Girin">
+            </p>
+        </div>
+        <div id="change-password" class="accord">
+            <div class="">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-400">Şifre Değiştir</h5>
+                        <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="changePassword" method="post">
+                            <div class="form-group">                                
+                                <input type="text" class="form-control" data-bv-field="existingpassword" id="existingPassword" required="" placeholder="Mevcut Şifrenizi Girin">
+                            </div>
+                            <div class="form-group">                                
+                                <input type="text" class="form-control" data-bv-field="newpassword" id="newPassword" required="" placeholder="Enter Yeni Şifrenizi Girin">
+                            </div>
+                            <div class="form-group">                               
+                                <input type="text" class="form-control" data-bv-field="confirmgpassword" id="confirmPassword" required="" placeholder="Yeni Şifrenizi Tekrar Girin">
+                            </div>
+                            <button class="btn btn-primary btn-block mt-4" type="submit">
+                               Güncelle
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Security End -->
+</div>
+

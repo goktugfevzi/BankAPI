@@ -1,0 +1,139 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--TITLE-->
+    <title>Roysha- Money Transfer and Online Payments HTML Template</title>
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" type="image/png" href="~/bank-template/images/favicon.png" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="~/bank-template/css/style.css" />
+
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+
+    <!-- Document Wrapper -->
+    <div id="main-wrapper">
+        <!-- Header start -->
+        <header class="header02">
+
+            <!--header -->
+            <div class="header-main">
+                <div class="container d-flex align-items-center">
+                    <a class="logo d-inline-flex" href="../roysha-html/index.html">
+                        <img src="~/bank-template/images/logo.png" alt="">
+                    </a>
+                    <nav class="primary-menu ml-auto">
+                        <a id="mobile-menu-toggler" href="#"><i class="fas fa-bars"></i></a>
+                        <ul>
+                            <li class="current-menu-item"><a href="dashboard.html">Dashboard</a>
+                            <li><a href="../roysha-html/contact.html">Contact</a></li>
+                            <li class="has-menu-child pro-menu-drop">
+                                <a href="#">
+                                    <div class="header-pro-thumb">
+                                        <img class="rounded-circle" src="~/bank-template/images/profile.jpg" alt="">
+                                    </div> Fevzi Özçelik <i class="fas fa-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu-md sub-menu profile-drop">
+                                    <li class="dropdown-header">
+                                        <div>
+                                            <h5 class="hidden-xs m-b-0 text-primary text-ellipsis">Jhon Due</h5>
+                                            <div class="small text-muted"><span>Üye ID:P14362606</span></div>
+                                        </div>
+                                    </li>
+                                    <li><hr class="mx-n3 mt-0"></li>
+                                    <li class="nav__create-new-profile-link">
+                                        <a href="profile.html">
+                                            <span>Profili Görüntüle</span>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li class="nav__dropdown-menu-items">
+                                        <a href="#"><i class="icon icon-logout"></i><span>Çıkış Yap</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!--end main header-->
+        </header>
+        <!-- Header end -->
+        <!--  Hero section-->
+        <!-- Content  -->
+        <div id="content" class="py-4 mx-4">
+            <div class="">
+                <div class="row">
+                    <!-- Left side bar -->
+                    <aside class="col-lg-3 sidebar">
+                        <!-- Pages List  -->
+                        <div class="bg-light shadow-sm text-center  mb-4" style="height:950px">
+                            <div class="Profile-menu">
+                                <ul class="nav secondary-nav">
+                                    <li class="nav-item active"><a class="nav-link " href="/Default/Index/"><i class="fas fa-tachometer-alt"></i> Ana Sayfa</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/User/MyAccount/"><i class="fab fa-autoprefixer"></i> Hesabım</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="profile-cards-and-bank-accounts.html"><i class="fas fa-university"></i> Kartlarım</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="deposit-money.html"><i class="fas fa-plus"></i> Para Yatır</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="send-money.html"><i class="far fa-paper-plane"></i> Para Gönder</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="transactions.html"><i class="fas fa-list-ul"></i>İşlemlerim</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="transactions.html"><i class="fas fa-list-ul"></i>Fatura İşlemleri</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="profile-notifications.html"><i class="fas fa-cog"></i>Çıkış Yap</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Pages List End -->
+                        <!-- Earn ? -->
+                        <!-- Need Help? End -->
+
+                    </aside>
+                    <!-- Left Panel End -->
+                    <!-- Middle Panel  -->
+
+                    @RenderBody()
+                    <!-- Middle Panel End -->
+                </div>
+            </div>
+        </div>
+        <!-- Content end -->
+        <!-- Footer strat -->
+        <footer class="footer">
+            <div class="foo-btm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="copyright">Tüm Hakları Saklıdır &copy; </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer end -->
+
+    </div>
+    <!-- Document Wrapper end -->
+    <!-- Script -->
+    <script src="~/bank-template/js/jquery.min.js"></script>
+    <script src="~/bank-template/js/bootstrap.bundle.min.js"></script>
+    <script src="~/bank-template/js/moment.min.js"></script>
+    <script src="~/bank-template/js/daterangepicker.js"></script>
+    <script src="~/bank-template/js/bootstrap-select.min.js"></script>
+    <script src="~/bank-template/js/custom.js"></script>
+</body>
+</html>
