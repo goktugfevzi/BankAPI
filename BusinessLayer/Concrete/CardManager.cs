@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
+using DTOLayer.DTOs.Card;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,29 +12,36 @@ namespace BusinessLayer.Concrete
 {
     public class CardManager : ICardService
     {
-        public void TDelete(Card t)
+        private readonly ICardDal _carddal;
+
+        public CardManager(ICardDal carddal)
         {
-            throw new NotImplementedException();
+            _carddal = carddal;
         }
 
-        public Card TGetById(int id)
+        public void TDelete(ResultCardDto t)
         {
-            throw new NotImplementedException();
+            _carddal.Delete(t);
         }
 
-        public List<Card> TGetListAll()
+        public ResultCardDto TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _carddal.GetById(id);
         }
 
-        public void TInsert(Card t)
+        public List<ResultCardDto> TGetListAll()
         {
-            throw new NotImplementedException();
+            return _carddal.GetListAll();
         }
 
-        public void TUpdate(Card t)
+        public void TInsert(CreateCardDto t)
         {
-            throw new NotImplementedException();
+            _carddal.Insert(t);
+        }
+
+        public void TUpdate(UpdateCardDto t)
+        {
+            _carddal.Update(t);
         }
     }
 }

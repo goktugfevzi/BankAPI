@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "SendMoney";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-lg-9">
+    <h3 class="text-5 font-weight-700 d-flex admin-heading">Para Gönderme Ekranı</h3>
+
+    <div class="bg-white">
+        <div class="row">
+            <div class="col-md-8 col-lg-8 mx-auto ">
+                <div class="bg-light shadow-md rounded p-3 p-sm-4 mb-4 form-box">
+
+                    <h3 class="text-5 msg-header">Gönderilecek Hesap Bilgileri</h3>
+                    <p class="text-4 text-center">7/24 Para Gönderme İşlemi Gerçekleştirebilirsiniz.</p>
+                    <!-- Send Money Form
+                      ============================================= -->
+                    <form id="form-send-money" method="post">
+                        <div class="form-group">
+                            <label for="emailID">Hesap Numarası</label>
+                            <input type="text" value="" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Hesap Numarası Girin">
+                        </div>
+                        <div class="form-group">
+                            <label for="youSend">Miktar</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text currency-icon">$</span>
+                                </div>
+                                <input type="text" class="form-control" data-bv-field="youSend" id="youSend" value="1,000" placeholder="">
+                                <div class="input-group-append">
+                                    <span class="input-group-text p-0">
+                                        <select id="youSendCurrency" data-style="custom-select bg-transparent border-0" data-container="body" data-live-search="true" class="selectpicker form-control bg-transparent" required="">
+
+                                            <optgroup label="Para Birimi">                                      
+                                                <option data-icon="currency-flag currency-flag-try mr-1" data-subtext="Türk Lirası" value="">TRY</option>                                                
+                                            </optgroup>
+                                        </select>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="mb-1">Gönderme Ücreti <span class="text-3 float-right">35 TRY</span></p>
+                        <p class="font-weight-500">
+                            Toplam Tutar <span class="text-3 float-right">1,035.00 TRY</span>
+                        </p>
+                        <button class="btn btn-default btn-center btn-block">
+                            <span class="bh"></span>
+                            <span>Gönder</span>
+                        </button>
+                    </form>
+                    <!-- Send Money Form end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

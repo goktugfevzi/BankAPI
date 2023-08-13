@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class mig_first : Migration
+    public partial class initalize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,8 +32,7 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneConfirmCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ConfirmCode = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -107,21 +106,20 @@ namespace DataAccessLayer.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    AccountID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    AppUserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     AccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                    table.PrimaryKey("PK_Accounts", x => x.AccountID);
                     table.ForeignKey(
-                        name: "FK_Accounts_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_Accounts_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -218,12 +216,12 @@ namespace DataAccessLayer.Migrations
                 {
                     CardId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
                     CardNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CardType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExpiryMonth = table.Column<int>(type: "int", nullable: false),
                     ExpiryYear = table.Column<int>(type: "int", nullable: false),
-                    CardCvc = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CardCvc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AccountID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,7 +230,7 @@ namespace DataAccessLayer.Migrations
                         name: "FK_Cards_Accounts_AccountID",
                         column: x => x.AccountID,
                         principalTable: "Accounts",
-                        principalColumn: "Id",
+                        principalColumn: "AccountID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -242,13 +240,12 @@ namespace DataAccessLayer.Migrations
                 {
                     TransactionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AccountID = table.Column<int>(type: "int", nullable: false),
-                    TransactionTypeID = table.Column<int>(type: "int", nullable: false),
                     SenderAccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverAccountNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TransactionTypeID = table.Column<int>(type: "int", nullable: false),
+                    AccountID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -257,8 +254,7 @@ namespace DataAccessLayer.Migrations
                         name: "FK_Transactions_Accounts_AccountID",
                         column: x => x.AccountID,
                         principalTable: "Accounts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AccountID");
                     table.ForeignKey(
                         name: "FK_Transactions_TransactionTypes_TransactionTypeID",
                         column: x => x.TransactionTypeID,
@@ -268,9 +264,9 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_AppUserId",
+                name: "IX_Accounts_UserId",
                 table: "Accounts",
-                column: "AppUserId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

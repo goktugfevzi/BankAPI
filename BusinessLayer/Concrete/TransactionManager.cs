@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DTOLayer.DTOs.Transaction;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,29 +12,41 @@ namespace BusinessLayer.Concrete
 {
     public class TransactionManager : ITransactionService
     {
-        public void TDelete(Transaction t)
+        private readonly ITransactionDal _transactionDal;
+
+        public TransactionManager(ITransactionDal transactionDal)
         {
-            throw new NotImplementedException();
+            _transactionDal = transactionDal;
         }
 
-        public Transaction TGetById(int id)
+        public void TDelete(ResultTransactionDto t)
         {
-            throw new NotImplementedException();
+            _transactionDal.Delete(t);
         }
 
-        public List<Transaction> TGetListAll()
+        public ResultTransactionDto TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _transactionDal.GetById(id);
         }
 
-        public void TInsert(Transaction t)
+        public List<ResultTransactionDto> TGetListAll()
         {
-            throw new NotImplementedException();
+            return _transactionDal.GetListAll();
         }
 
-        public void TUpdate(Transaction t)
+        public List<ResultTransactionDto> TGetTransactionByAccountID(string accountNumber)
         {
-            throw new NotImplementedException();
+            return _transactionDal.GetTransactionByAccountID(accountNumber);
+        }
+
+        public void TInsert(CreateTransactionDto t)
+        {
+           _transactionDal.Insert(t);
+        }
+
+        public void TUpdate(UpdateTransactionDto t)
+        {
+            _transactionDal.Update(t);
         }
     }
 }

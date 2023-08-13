@@ -9,13 +9,21 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Context
 {
-    public class BankContext : IdentityDbContext<AppUser, AppRole, int>
+    public class BankContext : IdentityDbContext<User, Role, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=bankappserver.database.windows.net;initial catalog=BankApiDB; User ID=BankAdmin;Password=Admin123;");
+            optionsBuilder.UseSqlServer("server=DESKTOP-ITA1D3N\\SQLEXPRESS;database= BankApiDB;integrated security = true");
         }
-        //;TrustServerCertificate=False;Connection Timeout=30;
+
+
+        //    optionsBuilder.UseSqlServer("server=FRKN\\SQLEXPRESS;database= BankApiDB;integrated security = true");
+        //    optionsBuilder.UseSqlServer("server=DESKTOP-ITA1D3N\\SQLEXPRESS;database= BankApiDB;integrated security = true");
+        // optionsBuilder.UseSqlServer("server=bankappserver.database.windows.net;database=BankApiDB;user=BankAdmin;password=Admin123;Connection Timeout=30;TrustServerCertificate=False;");
+
+
+
+
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Bill> Bills { get; set; }

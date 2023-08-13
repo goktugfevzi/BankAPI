@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
+using DTOLayer.DTOs.Account;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,29 +12,36 @@ namespace BusinessLayer.Concrete
 {
     public class AccountManager : IAccountService
     {
-        public void TDelete(Account t)
+        private readonly IAccountDal _accountDal;
+
+        public AccountManager(IAccountDal accountDal)
         {
-            throw new NotImplementedException();
+            _accountDal = accountDal;
         }
 
-        public Account TGetById(int id)
+        public void TDelete(ResultAccountDto t)
         {
-            throw new NotImplementedException();
+            _accountDal.Delete(t);
         }
 
-        public List<Account> TGetListAll()
+        public ResultAccountDto TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _accountDal.GetById(id);
         }
 
-        public void TInsert(Account t)
+        public List<ResultAccountDto> TGetListAll()
         {
-            throw new NotImplementedException();
+            return _accountDal.GetListAll();
         }
 
-        public void TUpdate(Account t)
+        public void TInsert(CreateAccountDto t)
         {
-            throw new NotImplementedException();
+            _accountDal.Insert(t);
+        }
+
+        public void TUpdate(UpdateAccountDto t)
+        {
+            _accountDal.Update(t);
         }
     }
 }

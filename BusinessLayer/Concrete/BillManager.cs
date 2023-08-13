@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
+using DTOLayer.DTOs.Bill;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,29 +12,36 @@ namespace BusinessLayer.Concrete
 {
     public class BillManager : IBillService
     {
-        public void TDelete(Bill t)
+        private readonly IBillDal _billDal;
+
+        public BillManager(IBillDal billDal)
         {
-            throw new NotImplementedException();
+            _billDal = billDal;
         }
 
-        public Bill TGetById(int id)
+        public void TDelete(ResultBillDto t)
         {
-            throw new NotImplementedException();
+            _billDal.Delete(t);
         }
 
-        public List<Bill> TGetListAll()
+        public ResultBillDto TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _billDal.GetById(id);
         }
 
-        public void TInsert(Bill t)
+        public List<ResultBillDto> TGetListAll()
         {
-            throw new NotImplementedException();
+            return _billDal.GetListAll();
         }
 
-        public void TUpdate(Bill t)
+        public void TInsert(CreateBillDto t)
         {
-            throw new NotImplementedException();
+            _billDal.Insert(t);
+        }
+
+        public void TUpdate(UpdateBillDto t)
+        {
+            _billDal.Update(t);
         }
     }
 }
