@@ -1,8 +1,12 @@
+using DataAccessLayer.Context;
+using EntityLayer.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<BankContext>();
+builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<BankContext>();
 
 builder.Services.AddHttpClient();
 var app = builder.Build();
@@ -19,7 +23,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

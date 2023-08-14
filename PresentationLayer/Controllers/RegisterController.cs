@@ -1,16 +1,16 @@
 ﻿using DTOLayer.DTOs.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
 using System.Text;
 
 namespace PresentationLayer.Controllers
 {
-    public class AuthController : Controller
+    public class RegisterController : Controller
     {
+
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public AuthController(IHttpClientFactory httpClientFactory)
+        public RegisterController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -36,5 +36,6 @@ namespace PresentationLayer.Controllers
 
             return RedirectToAction("Index", "login");
         }
+
     }
 }
