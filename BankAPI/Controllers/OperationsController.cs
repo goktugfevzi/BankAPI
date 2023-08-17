@@ -32,22 +32,18 @@ namespace BankAPI.Controllers
             _userManager = userManager;
         }
 
-        //[HttpPost("Deposit")]
-        //public IActionResult Deposit(DepositDto depositDto)
-        //{
-        //    var value = _accountService.TGetById(depositDto.AccountID);
-        //    value.Balance += depositDto.Balance;
-        //    var result=_mapper.Map<UpdateAccountDto>(value);
-        //    _accountService.TUpdate(result);
-        //    return Ok("Hesabınıza Para Yatırıldı");
-        //}
+        [HttpPost("Deposit")]
+        public IActionResult Deposit(DepositDto depositDto)
+        {
+            _transactionService.TDeposit(depositDto);
+            return Ok("Hesabınıza Para Yatırıldı");
+        }
 
         [HttpPost("SendMoney")]
-        public IActionResult SendMoney(CreateTransactionDto createTransactionDto)
+        public IActionResult SendMoney(SendMoneyDto sendMoneyDto)
         {
-            createTransactionDto.TransactionDate = DateTime.Now;
-            createTransactionDto.TransactionTypeID = 1;
-            return Ok();
+            _transactionService.TSendMoney(sendMoneyDto);
+            return Ok("Para Gönderme İşlemi Başarılı");
         }
 
 

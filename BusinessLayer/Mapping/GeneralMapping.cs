@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DTOLayer.DTOs.Bill;
 using DTOLayer.DTOs.Card;
+using DTOLayer.DTOs.Operations;
 using DTOLayer.DTOs.TransactionDto;
 using DTOLayer.DTOs.TransactionType;
 using EntityLayer.Concrete;
@@ -23,6 +24,8 @@ namespace BusinessLayer.Mapping
             CreateMap<Card, CreateCardDto>().ReverseMap();
             CreateMap<Card, UpdateCardDto>().ReverseMap();
             CreateMap<Transaction, ResultTransactionDto>().ReverseMap();
+            CreateMap<Transaction, DepositDto>().ReverseMap();
+            CreateMap<Transaction, SendMoneyDto>().ReverseMap();
             CreateMap<Transaction, CreateTransactionDto>().ReverseMap();
             CreateMap<Transaction, UpdateTransactionDto>().ReverseMap();
             CreateMap<TransactionType, ResultTransactionTypeDto>().ReverseMap();

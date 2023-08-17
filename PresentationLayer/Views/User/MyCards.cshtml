@@ -36,7 +36,7 @@
                         <div class="account-card-overlay rounded">
                             <a href="#" id="BtnCardDetail" data-month="@item.ExpiryMonth" data-year="@item.ExpiryYear" data-cvv="@item.CardCvc" data-holder="@item.HolderName" data-cardnumber="@item.CardNumber" data-cardtype="@item.CardType" data-cardid="@item.CardId" class="text-light btn-link mx-2">
                                 <span class="mr-1">
-                            <i class="fas fa-edit"></i></span>Düzenle</a>
+                            <i class="fas fa-edit"></i></span>Detay</a>
                             <a href="/User/DeleteCards/@item.CardId" class="text-light btn-link mx-2">
                             <span class="mr-1"><i class="fas fa-minus-circle"></i></span>Sil</a></div>
                     </div>
@@ -62,7 +62,7 @@
                     <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body p-4">
-                    <form id="updateCard" method="post">
+                    <form  method="post">
                         <input name="CardType" id="CardType" type="hidden">
                         <input name="CardId" id="CardId" type="hidden">
                         <div class="form-group">
@@ -73,38 +73,38 @@
                                         <img id="cardlogo" class="ml-auto" src="~/bank-template/images/visa.png" alt="visa" title="">
                                     </span>
                                 </div>
-                                <input name="CardNumber" id="UpdateCardNumber" type="text" class="form-control" data-bv-field="edircardNumber"  />
+                                <input name="CardNumber" readonly id="UpdateCardNumber" type="text" class="form-control" data-bv-field="edircardNumber"  />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="expiryDate">SKT/MM</label>
-                                    <input name="ExpiryMonth" id="expiryMonth" type="text" class="form-control" data-bv-field="expiryDate" required="" placeholder="MM/YY">
+                                    <input name="ExpiryMonth" readonly id="expiryMonth" type="text" class="form-control" data-bv-field="expiryDate" required="" placeholder="MM/YY">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="expiryDate">SKT/YY</label>
-                                    <input name="ExpiryYear" id="expiryYear" type="text" class="form-control" data-bv-field="expiryDate" required=""  placeholder="MM/YY">
+                                    <input name="ExpiryYear" readonly id="expiryYear" type="text" class="form-control" data-bv-field="expiryDate" required="" placeholder="MM/YY">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="editcvvNumber">CVV <span class="text-info ml-1" data-toggle="tooltip" data-original-title="Kartınızın arka yüzündeki 3 haneli rakam."><i class="fas fa-question-circle"></i></span></label>
-                                    <input name="CardCvc" id="editcvvNumber" type="text" class="form-control" data-bv-field="editcvvNumber" required="" placeholder="CVV (3 digits)">
+                                    <input name="CardCvc" readonly id="editcvvNumber" type="text" class="form-control" data-bv-field="editcvvNumber" required="" placeholder="CVV (3 digits)">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="editcardHolderName">Kart Sahibi</label>
-                            <input type="text" name="HolderName" class="form-control" id="UpdateHolderName" data-bv-field="editcardHolderName" required="" placeholder="Kart Sahibi">
+                            <input type="text" name="HolderName" readonly class="form-control" id="UpdateHolderName" data-bv-field="editcardHolderName" required="" placeholder="Kart Sahibi">
                         </div>
                        @* <button class="btn btn-default btn-center btn-block">
                             <span class="bh"></span>
                             <span>Güncelle</span>
                         </button>*@
-                        <a id="BtnUpdateCard" class="btn btn-default btn-center btn-block">Güncelle</a>
+                        <a id="BtnUpdateCard" class="btn btn-default btn-center btn-block">Tamam</a>
                     </form>
                 </div>
             </div>
@@ -131,8 +131,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="CardNumber">Kart Numarası</label>
-                            <input name="CardNumber" readonly type="text" class="form-control" data-bv-field="cardnumber" id="cardNumber" required="" value="" placeholder="Card Number">
+                            <label for="CardNumber1">Kart Numarası</label>
+                           @* <input name="CardNumber" readonly type="text" class="form-control" id="cardNumber" />*@
+                            <input name="CardNumber" id="cardNumber" type="text" class="form-control" data-bv-field="expiryDate" placeholder="CardNumber">
                         </div>
                         <div class="form-row">
                             <div class="col-lg-4">

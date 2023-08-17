@@ -8,8 +8,10 @@ namespace DTOLayer.DTOs.Operations
 {
     public class SendMoneyDto
     {
-        public int SenderAccountNumber { get; set; }
-        public int ReceiverAccountNumber { get; set; }
+        public string SenderAccountNumber { get; set; }
+        public string ReceiverAccountNumber { get; set; }
         public decimal Amount { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public int TransactionTypeID { get; set; }
     }
 }

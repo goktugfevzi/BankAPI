@@ -27,6 +27,7 @@ namespace PresentationLayer.Controllers
 
             var UserID = HttpContext.Session.GetInt32("userid");
             var user = await _userManager.FindByIdAsync(UserID.ToString());
+            @ViewBag.UserName=user.FirstName +" " +user.LastName;
             var client = _httpClientFactory.CreateClient();
             var responseMessage2 = await client.GetAsync($"https://localhost:7119/api/Transaction/TransactionListByAccountNumber?accountNumber={user.AccountNumber}");
             if (user != null)

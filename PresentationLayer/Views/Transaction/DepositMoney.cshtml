@@ -13,19 +13,19 @@
                 <div class="bg-light shadow-md rounded p-3 p-sm-4 mb-8 mt-8 form-box">
 
                     <!-- Deposit Money Form  -->
-                    <form id="form-send-money" method="post" class="form">
+                    <form id="FrmDeposit" method="post" class="form">
                         <div class="form-group">
                             <label for="youSend">Miktar</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text currency-icon">₺</span>
                                 </div>
-                                <input type="text" class="form-control" data-bv-field="youSend" id="youSend" value="1,000" placeholder="">
+                                <input type="text" name="Amount" class="form-control" data-bv-field="youSend" id="youSend" value="0,00" placeholder="Miktar Giriniz">
+
                                 <div class="input-group-append">
                                     <span class="input-group-text p-0">
                                         <select id="youSendCurrency" data-style="custom-select bg-transparent border-0" data-container="body" data-live-search="true" class="selectpicker form-control bg-transparent" required="">                                   
-                                            <optgroup label="Para Birimleri">
-                                                
+                                            <optgroup label="Para Birimleri">                                               
                                                 <option data-icon="currency-flag currency-flag-try mr-1" data-subtext="Turkish lira" value="">TRY</option>
                                                 
                                             </optgroup>
@@ -36,21 +36,20 @@
                         </div>
                         <div class="form-group">
                             <label for="paymentMethod">Paranın Yatacağı Hesap</label>
-                            <select id="cardType" class="custom-select" required="">
-                                <option value="">Hesap Seçin</option>
-                                <option>Hesap 1 </option>
-                                <option>Hesap 2</option>
+                            <select id="cardType" class="custom-select" required="">                                
+                                <option>EnterBankX</option>
                             </select>
                         </div>
                         <p class="text-muted charge-area mt-4">
-                            Transactions fees <span class="float-right d-flex align-items-center"><del>25.00 TL</del> <span class="bg-success text-1 text-white font-weight-500 rounded d-inline-block px-2 line-height-4 ml-2 free-charge">Ücretsiz</span></span>
+                            İşlem Ücreti <span class="float-right d-flex align-items-center"><del>25.00 TL</del> <span class="bg-success text-1 text-white font-weight-500 rounded d-inline-block px-2 line-height-4 ml-2 free-charge">Ücretsiz</span></span>
                         </p>
                         <hr>
-                        <p class="font-weight-500">Yatırılacak Miktar <span class="text-3 float-right">1,000.00 TRY</span></p>
-                        <button class="btn btn-default btn-center btn-block">
+                        <p class="font-weight-500">Yatırılacak Miktar <span id="depositAmount" class="text-3 float-right">0.00 TRY</span></p>
+
+                        <a id="BtnDeposit" class="btn btn-default btn-center btn-block">
                             <span class="bh"></span>
                             <span>Yatır</span>
-                        </button>
+                        </a>
                     </form>                   
                 </div>
             </div>

@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DTOLayer.DTOs.Operations;
 using DTOLayer.DTOs.TransactionDto;
 using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
@@ -25,6 +26,11 @@ namespace BusinessLayer.Concrete
             _transactionDal.Delete(t);
         }
 
+        public void TDeposit(DepositDto depositDto)
+        {
+            _transactionDal.Deposit(depositDto);
+        }
+
         public ResultTransactionDto TGetById(int id)
         {
             return _transactionDal.GetById(id);
@@ -43,6 +49,11 @@ namespace BusinessLayer.Concrete
         public void TInsert(CreateTransactionDto t)
         {
             _transactionDal.Insert(t);
+        }
+
+        public void TSendMoney(SendMoneyDto sendMoneyDto)
+        {
+            _transactionDal.SendMoney(sendMoneyDto);
         }
 
         public void TUpdate(UpdateTransactionDto t)

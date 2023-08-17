@@ -1,4 +1,5 @@
-﻿using DTOLayer.DTOs.TransactionDto;
+﻿using DTOLayer.DTOs.Operations;
+using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,7 @@ namespace BusinessLayer.Abstract
         ResultTransactionDto TGetById(int id);
         List<ResultTransactionDto> TGetListAll();
         List<Transaction> TGetTransactionByAccountNumber(string accountNumber);
+        void TDeposit(DepositDto depositDto); 
+        void TSendMoney(SendMoneyDto sendMoneyDto);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DTOLayer.DTOs.Card;
+using DTOLayer.DTOs.Operations;
 using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
 using System;
@@ -17,6 +18,9 @@ namespace DataAccessLayer.Abstract
         ResultTransactionDto GetById(int id);
         List<ResultTransactionDto> GetListAll();
         List<Transaction> GetTransactionByAccountNumber(string AccountNumber);
+        void Deposit(DepositDto depositDto);
+        void SendMoney(SendMoneyDto sendMoneyDto);
+
 
     }
 }

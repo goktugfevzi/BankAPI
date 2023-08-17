@@ -36,8 +36,19 @@
             @foreach (var item in Model.transactions)
             {
                 <tr>
+                    @if(@item.SenderAccountNumber==@Model.user.AccountNumber){
                     <td>@item.SenderAccountNumber  - @Model.user.FirstName</td>
                     <td>@item.ReceiverAccountNumber</td>
+                    }
+                    else if(@item.ReceiverAccountNumber==@Model.user.AccountNumber){
+                    <td>@item.SenderAccountNumber</td>
+                    <td>@item.ReceiverAccountNumber - @Model.user.FirstName</td>
+                    }
+                    else{
+                    <td>@item.SenderAccountNumber</td>
+                    <td>@item.ReceiverAccountNumber</td>
+                    }
+                    
                     <td>@Convert.ToDateTime(item.TransactionDate).ToString("dd/MM/yyyy")</td>
                     <td>@item.TransactionType.TransactionTypeName</td>
                     <td>@item.Amount ₺</td>

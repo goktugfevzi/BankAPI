@@ -10,7 +10,6 @@ namespace DTOLayer.DTOs.Card
     {
         public int CardId { get; set; }
         public int Id { get; set; }
-
         public string CardNumber { get; set; }
         public string HolderName { get; set; }
         public string CardType { get; set; }

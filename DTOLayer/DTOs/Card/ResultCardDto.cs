@@ -16,6 +16,5 @@ namespace DTOLayer.DTOs.Card
         public int ExpiryYear { get; set; }
         public string CardCvc { get; set; }
         public int Id { get; set; }
-
     }
 }

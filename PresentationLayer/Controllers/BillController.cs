@@ -52,7 +52,7 @@ namespace PresentationLayer.Controllers
             var responseMessage = await client.PostAsync($"https://localhost:7119/api/Operations/PayBill", content);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Transaction");
+                return Json(new { SONUC = true });
             }
             ViewBag.Error = responseMessage.RequestMessage;
             return View();

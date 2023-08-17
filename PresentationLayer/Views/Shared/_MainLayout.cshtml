@@ -42,25 +42,25 @@
                             <li class="has-menu-child pro-menu-drop">
                                 <a href="#">
                                     <div class="header-pro-thumb">
-                                        <img class="rounded-circle" src="~/bank-template/images/profile.jpg" alt="">
-                                    </div> Fevzi Özçelik <i class="fas fa-chevron-down"></i>
+                                        <img class="rounded-circle" src="~/bank-template/images/user.png" alt="">
+                                    </div> @ViewBag.UserName <i class="fas fa-chevron-down"></i>
                                 </a>
                                 <ul class="dropdown-menu-md sub-menu profile-drop">
                                     <li class="dropdown-header">
                                         <div>
-                                            <h5 class="hidden-xs m-b-0 text-primary text-ellipsis">Fevzi ÖZÇELİK</h5>
+                                            <h5 class="hidden-xs m-b-0 text-primary text-ellipsis">@ViewBag.UserName</h5>
                                             <div class="small text-muted"><span>Üye ID:P14362606</span></div>
                                         </div>
                                     </li>
                                     <li><hr class="mx-n3 mt-0"></li>
                                     <li class="nav__create-new-profile-link">
-                                        <a href="profile.html">
+                                        <a href="/User/MyAccount/">
                                             <span>Profili Görüntüle</span>
                                         </a>
                                     </li>
                                     <li class="divider"></li>
                                     <li class="nav__dropdown-menu-items">
-                                        <a href="#"><i class="icon icon-logout"></i><span>Çıkış Yap</span></a>
+                                        <a href="/Login/Index/"><i class="icon icon-logout"></i><span>Çıkış Yap</span></a>
                                     </li>
                                 </ul>
                             </li>
@@ -128,7 +128,9 @@
     <script src="~/bank-template/js/jquery.min.js"></script>
     <script src="~/js/script.js"></script>
     <script src="~/bank-template/js/bootstrap.bundle.min.js"></script>
-
+    @*
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
     <script src="~/bank-template/js/moment.min.js"></script>
     <script src="~/bank-template/js/daterangepicker.js"></script>
     <script src="~/bank-template/js/bootstrap-select.min.js"></script>

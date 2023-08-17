@@ -30,6 +30,7 @@ namespace PresentationLayer.Controllers
 
             var UserName = HttpContext.Session.GetString("UserName");
             var user = await _userManager.FindByNameAsync(UserName.ToString());
+            @ViewBag.UserName = user.FirstName + " " + user.LastName;
             if (user != null)
             {
                 user.ConfirmCode = confirmCode;
@@ -64,7 +65,7 @@ namespace PresentationLayer.Controllers
         {
             var user = await _userManager.FindByIdAsync(confirmCodeDto.Id.ToString());
             string confirmCode = confirmCodeDto.Code1.ToString() + confirmCodeDto.Code2.ToString() + confirmCodeDto.Code3.ToString() + confirmCodeDto.Code4.ToString() + confirmCodeDto.Code5.ToString() + confirmCodeDto.Code6.ToString();
-
+            @ViewBag.UserName = user.FirstName + " " + user.LastName;
             if (user.ConfirmCode.ToString() == confirmCode)
             {                
                 HttpContext.Session.SetInt32("userid", user.Id);

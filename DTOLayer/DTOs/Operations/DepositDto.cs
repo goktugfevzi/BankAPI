@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace DTOLayer.DTOs.Operations
 {
     public class DepositDto
-    {
-       
-        public int UserID { get; set; }
-        public decimal Balance { get; set; }
+    {       
+        public string SenderAccountNumber { get; set; }       
+        public decimal Amount { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public int TransactionTypeID { get; set; }
     }
 }

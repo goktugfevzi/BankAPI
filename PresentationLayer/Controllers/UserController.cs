@@ -24,7 +24,7 @@ namespace PresentationLayer.Controllers
         {
             var UserID = HttpContext.Session.GetInt32("userid");
             var user = await _userManager.FindByIdAsync(UserID.ToString());
-
+            @ViewBag.UserName = user.FirstName + " " + user.LastName;
             return View(user);
         }
 
@@ -133,6 +133,7 @@ namespace PresentationLayer.Controllers
         {
             var UserID = HttpContext.Session.GetInt32("userid");
             var user = await _userManager.FindByIdAsync(UserID.ToString());
+            @ViewBag.UserName = user.FirstName + " " + user.LastName;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7119/api/Card/GetCardByAccount?id={user.Id}");
             if (responseMessage.IsSuccessStatusCode)
@@ -170,6 +171,33 @@ namespace PresentationLayer.Controllers
                 return RedirectToAction("MyCards");
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GenerateCardNumber()
+        {
+            Random rnd = new Random();
+            var UserID = HttpContext.Session.GetInt32("userid");
+            var user = await _userManager.FindByIdAsync(UserID.ToString());
+            List<object> cardDetails = new List<object>();
+            int First4 = rnd.Next(5100, 5300);
+            int Middle6 = rnd.Next(100000, 999999);
+            int Last6 = rnd.Next(100000, 999999);
+            string accountNumber = First4.ToString() + Middle6.ToString() + Last6.ToString();
+            // 2 tane rastgele integer alan
+            int month = rnd.Next(1, 10);
+            int year = rnd.Next(23, 30);
+            int cvv = rnd.Next(600, 999);
+            string HolderName = user.FirstName + " " + user.LastName;
+            
+
+            cardDetails.Add(accountNumber);
+            cardDetails.Add(month);
+            cardDetails.Add(year);
+            cardDetails.Add(cvv);
+            cardDetails.Add(HolderName);
+
+            return Ok(cardDetails);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace PresentationLayer.Controllers
         public async Task<IActionResult> Index(string Email)
         {
             var user = await _userManager.FindByEmailAsync(Email);
+            @ViewBag.UserName = user.FirstName + " " + user.LastName;
             if (user != null)
             {
                 var client = _httpClientFactory.CreateClient();

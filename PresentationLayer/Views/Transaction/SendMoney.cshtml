@@ -16,18 +16,18 @@
                     <p class="text-4 text-center">7/24 Para Gönderme İşlemi Gerçekleştirebilirsiniz.</p>
                     <!-- Send Money Form
                       ============================================= -->
-                    <form id="form-send-money" method="post">
+                    <form id="FrmSendMoney" method="post">
                         <div class="form-group">
                             <label for="emailID">Hesap Numarası</label>
-                            <input type="text" value="" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Hesap Numarası Girin">
+                            <input type="text" name="ReceiverAccountNumber" class="form-control" data-bv-field="emailid"  required="" placeholder="Hesap Numarası Girin">
                         </div>
                         <div class="form-group">
                             <label for="youSend">Miktar</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text currency-icon">$</span>
+                                    <span class="input-group-text currency-icon">₺</span>
                                 </div>
-                                <input type="text" class="form-control" data-bv-field="youSend" id="youSend" value="1,000" placeholder="">
+                                <input type="text" class="form-control" data-bv-field="youSendmoney" id="youSendmoney" value="0,00" placeholder="">
                                 <div class="input-group-append">
                                     <span class="input-group-text p-0">
                                         <select id="youSendCurrency" data-style="custom-select bg-transparent border-0" data-container="body" data-live-search="true" class="selectpicker form-control bg-transparent" required="">
@@ -41,9 +41,9 @@
                             </div>
                         </div>
 
-                        <p class="mb-1">Gönderme Ücreti <span class="text-3 float-right">35 TRY</span></p>
+                        <p class="mb-1">Gönderme Ücreti <span id="postingfee" class="text-3 float-right">35 TRY</span></p>
                         <p class="font-weight-500">
-                            Toplam Tutar <span class="text-3 float-right">1,035.00 TRY</span>
+                            Toplam Tutar <span id="TotalPrice" class="text-3 float-right">35.00 TRY</span>
                         </p>
                         <button class="btn btn-default btn-center btn-block">
                             <span class="bh"></span>
