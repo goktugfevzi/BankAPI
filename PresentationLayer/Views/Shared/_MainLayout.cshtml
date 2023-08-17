@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -11,14 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--TITLE-->
-    <title>Roysha- Money Transfer and Online Payments HTML Template</title>
+    <title>EnterBankX</title>
 
     <!-- Favicon icon -->
     <link rel="shortcut icon" type="image/png" href="~/bank-template/images/favicon.png" />
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="~/bank-template/css/style.css" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -39,7 +38,7 @@
                     </a>
                     <nav class="primary-menu ml-auto">
                         <a id="mobile-menu-toggler" href="#"><i class="fas fa-bars"></i></a>
-                        <ul>                            
+                        <ul>
                             <li class="has-menu-child pro-menu-drop">
                                 <a href="#">
                                     <div class="header-pro-thumb">
@@ -89,7 +88,7 @@
                                     <li class="nav-item"><a class="nav-link" href="/Transaction/DepositMoney/"><i class="fas fa-plus"></i> Para Yatır</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/Transaction/SendMoney/"><i class="far fa-paper-plane"></i> Para Gönder</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/Transaction/Index/"><i class="fas fa-list-ul"></i>İşlemlerim</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="transactions.html"><i class="fas fa-list-ul"></i>Fatura İşlemleri</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/Bill"><i class="fas fa-list-ul"></i>Fatura İşlemleri</a></li>
                                     <li class="nav-item"><a class="nav-link" href="profile-notifications.html"><i class="fas fa-cog"></i>Çıkış Yap</a></li>
                                 </ul>
                             </div>
@@ -101,7 +100,6 @@
                     </aside>
                     <!-- Left Panel End -->
                     <!-- Middle Panel  -->
-
                     @RenderBody()
                     <!-- Middle Panel End -->
                 </div>
@@ -128,7 +126,9 @@
     <!-- Document Wrapper end -->
     <!-- Script -->
     <script src="~/bank-template/js/jquery.min.js"></script>
+    <script src="~/js/script.js"></script>
     <script src="~/bank-template/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/bank-template/js/moment.min.js"></script>
     <script src="~/bank-template/js/daterangepicker.js"></script>
     <script src="~/bank-template/js/bootstrap-select.min.js"></script>

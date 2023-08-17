@@ -22,38 +22,6 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("EntityLayer.Concrete.Account", b =>
-                {
-                    b.Property<int>("AccountID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AccountID"), 1L, 1);
-
-                    b.Property<string>("AccountName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AccountNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AccountID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Accounts");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Bill", b =>
                 {
                     b.Property<int>("BillID")
@@ -86,9 +54,6 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardId"), 1L, 1);
 
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
-
                     b.Property<string>("CardCvc")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -107,9 +72,16 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ExpiryYear")
                         .HasColumnType("int");
 
+                    b.Property<string>("HolderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("CardId");
 
-                    b.HasIndex("AccountID");
+                    b.HasIndex("Id");
 
                     b.ToTable("Cards");
                 });
@@ -152,14 +124,10 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionID"), 1L, 1);
 
-                    b.Property<int?>("AccountID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ReceiverAccountNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SenderAccountNumber")
@@ -172,11 +140,14 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("TransactionTypeID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("TransactionID");
 
-                    b.HasIndex("AccountID");
-
                     b.HasIndex("TransactionTypeID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
@@ -209,12 +180,30 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AccountName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AccountNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ConfirmCode")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -380,39 +369,28 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Account", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Card", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.User", "User")
-                        .WithMany("Accounts")
-                        .HasForeignKey("UserId")
+                        .WithMany()
+                        .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Card", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Transaction", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Account", null)
-                        .WithMany("Transactions")
-                        .HasForeignKey("AccountID");
-
                     b.HasOne("EntityLayer.Concrete.TransactionType", "TransactionType")
                         .WithMany()
                         .HasForeignKey("TransactionTypeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.User", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("TransactionType");
                 });
@@ -468,14 +446,9 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Account", b =>
-                {
-                    b.Navigation("Transactions");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.User", b =>
                 {
-                    b.Navigation("Accounts");
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

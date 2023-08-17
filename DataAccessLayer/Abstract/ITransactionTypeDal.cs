@@ -1,4 +1,4 @@
-﻿using DTOLayer.DTOs.Transaction;
+﻿using DTOLayer.DTOs.TransactionDto;
 using DTOLayer.DTOs.TransactionType;
 using EntityLayer.Concrete;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface ITransactionTypeDal 
+    public interface ITransactionTypeDal
     {
         void Insert(CreateTransactionTypeDto t);
         void Delete(ResultTransactionTypeDto t);

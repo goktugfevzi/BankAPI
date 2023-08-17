@@ -9,8 +9,10 @@ namespace DTOLayer.DTOs.Card
     public class UpdateCardDto
     {
         public int CardId { get; set; }
-        public int AccountID { get; set; }
+        public int Id { get; set; }
+
         public string CardNumber { get; set; }
+        public string HolderName { get; set; }
         public string CardType { get; set; }
         public int ExpiryMonth { get; set; }
         public int ExpiryYear { get; set; }

@@ -21,6 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.ContainerDependencies();
+
+
 builder.Services.AddAutoMapper(typeof(GeneralMapping));
 
 //builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

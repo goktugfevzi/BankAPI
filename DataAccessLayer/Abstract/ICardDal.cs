@@ -15,5 +15,6 @@ namespace DataAccessLayer.Abstract
         void Update(UpdateCardDto t);
         ResultCardDto GetById(int id);
         List<ResultCardDto> GetListAll();
+        List<ResultCardDto> GetListByAccount(int id);
     }
 }

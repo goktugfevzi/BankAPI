@@ -1,5 +1,5 @@
 ﻿using BusinessLayer.Abstract;
-using DTOLayer.DTOs.Transaction;
+using DTOLayer.DTOs.TransactionDto;
 using DTOLayer.DTOs.TransactionType;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

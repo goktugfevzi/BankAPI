@@ -24,12 +24,18 @@
                     </div>
                     <div class="field">
                         <div class="label">Şifre</div>
-                        <input type="text" name="Password">
+                        <input type="password" name="Password">
                     </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <label style="color:red">@ViewBag.Error</label>
+                    }
                     <div class="field btns">
                         <button class="submit">Giriş</button>
                     </div>
-                    <a href=""></a>
+                    <a href="~/ForgetPassword">Şifrenizi mi unuttunuz?</a>
+                    <br />
+                    <a href="~/Register">Hesabınız yok mu?</a>
                 </div>
             </form>
         </div>

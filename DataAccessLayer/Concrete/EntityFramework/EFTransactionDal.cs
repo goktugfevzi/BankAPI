@@ -2,8 +2,9 @@
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
 using DTOLayer.DTOs.Card;
-using DTOLayer.DTOs.Transaction;
+using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,10 +43,10 @@ namespace DataAccessLayer.Concrete.EntityFramework
             return _mapper.Map<List<ResultTransactionDto>>(value);
         }
 
-        public List<ResultTransactionDto> GetTransactionByAccountID(string accountnumber)
+        public List<Transaction> GetTransactionByAccountNumber(string accountnumber)
         {
-            var value = _context.Transactions.Where(x => x.SenderAccountNumber == accountnumber).ToList();
-            return _mapper.Map<List<ResultTransactionDto>>(value);
+            var value = _context.Transactions.Include("TransactionType").Where(x => x.SenderAccountNumber == accountnumber || x.ReceiverAccountNumber==accountnumber).ToList();
+            return _mapper.Map<List<Transaction>>(value);
         }
 
         public void Insert(CreateTransactionDto t)

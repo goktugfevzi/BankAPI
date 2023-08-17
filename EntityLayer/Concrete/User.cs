@@ -12,6 +12,11 @@ namespace EntityLayer.Concrete
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int ConfirmCode { get; set; }
-        public List<Account> Accounts { get; set; }
+        public string AccountNumber { get; set; }
+        public string AccountName { get; set; }
+        public decimal Balance { get; set; }
+        public string Address { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public List<Transaction> Transactions { get; set; }
     }
 }

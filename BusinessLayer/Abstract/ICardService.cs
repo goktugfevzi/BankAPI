@@ -15,5 +15,6 @@ namespace BusinessLayer.Abstract
         void TUpdate(UpdateCardDto t);
         ResultCardDto TGetById(int id);
         List<ResultCardDto> TGetListAll();
+        List<ResultCardDto> GetListByAccount(int id);
     }
 }

@@ -19,6 +19,11 @@ namespace BusinessLayer.Concrete
             _carddal = carddal;
         }
 
+        public List<ResultCardDto> GetListByAccount(int id)
+        {
+            return _carddal.GetListByAccount(id);
+        }
+
         public void TDelete(ResultCardDto t)
         {
             _carddal.Delete(t);

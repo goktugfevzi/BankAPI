@@ -41,6 +41,11 @@
                     <div class="field btns">
                         <button class="submit">Kaydet</button>
                     </div>
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="label">Hatalı Giriş</div>
+
+                    }
                 </div>
             </form>
         </div>

@@ -11,9 +11,11 @@ namespace DataAccessLayer.Context
 {
     public class BankContext : IdentityDbContext<User, Role, int>
     {
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-ITA1D3N\\SQLEXPRESS;database= BankApiDB;integrated security = true");
+
         }
 
 
@@ -25,7 +27,6 @@ namespace DataAccessLayer.Context
 
 
 
-        public DbSet<Account> Accounts { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

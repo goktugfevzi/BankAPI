@@ -1,0 +1,55 @@
+﻿@model List<EntityLayer.Concrete.Bill>
+
+@{
+    ViewData["Title"] = "Bill";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-lg-9">
+    <div class="bg-white">
+        <div class="row">
+            <div class="col-md-8 col-lg-8 mx-auto ">
+                <div class="bg-light shadow-md rounded p-3 p-sm-4 mb-8 mt-8 form-box">
+                    <form id="form-send-money" method="post" class="form">
+                        <div class="form-group">
+                            <label for="youSend">Miktar</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text currency-icon">₺</span>
+                                </div>
+                                <input type="text" class="form-control" name="youSend" id="youSend" value="@ViewBag.User.Balance" placeholder="" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMethod">Ödenecek Fatura</label>
+                            <select id="cardType" class="custom-select" required="">
+                                <option value="">Fatura Seçin</option>
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.BillID" data-amount="@item.Amount">@item.BillName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="font-weight-500">Yatırılacak Miktar <span id="depositAmount" class="text-3 float-right">0.00 TRY</span></p>
+                        </div>
+                        <a id="payBillButton" class="btn btn-default btn-center btn-block">
+                            <span class="bh"></span>
+                            <span>Faturayı Öde</span>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('cardType').addEventListener('change', function () {
+        var selectedOption = this.options[this.selectedIndex];
+        var selectedBillAmount = selectedOption.getAttribute('data-amount');
+
+        var formattedAmount = parseFloat(selectedBillAmount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('depositAmount').textContent = formattedAmount + ' TRY';
+    });
+</script>

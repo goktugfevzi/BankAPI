@@ -24,6 +24,13 @@ namespace BankAPI.Controllers
             return Ok(values);
         }
 
+        [HttpGet("GetCardByAccount")]
+        public IActionResult GetCardByAccount(int id)
+        {
+            var values = _cardService.GetListByAccount(id);
+            return Ok(values);
+        }
+
         [HttpPost]
         public IActionResult AddCard(CreateCardDto createCardDto)
         {

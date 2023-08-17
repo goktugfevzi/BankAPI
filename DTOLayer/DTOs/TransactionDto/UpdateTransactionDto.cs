@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTOLayer.DTOs.Transaction
+namespace DTOLayer.DTOs.TransactionDto
 {
-    public class CreateTransactionDto
-    {        
+    public class UpdateTransactionDto
+    {
+        public int TransactionID { get; set; }
         public string SenderAccountNumber { get; set; }
-        public string ReceiverAccountNumber { get; set; }
+        public string? ReceiverAccountNumber { get; set; }
         public decimal Amount { get; set; }
-        public string Currency { get; set; }
-        public DateTime TransactionDate { get; set; }        
+        public DateTime TransactionDate { get; set; }
         public int TransactionTypeID { get; set; }
     }
 }

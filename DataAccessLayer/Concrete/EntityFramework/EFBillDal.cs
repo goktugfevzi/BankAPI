@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
-using DTOLayer.DTOs.Account;
 using DTOLayer.DTOs.Bill;
 using EntityLayer.Concrete;
 using System;

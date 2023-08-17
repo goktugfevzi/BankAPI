@@ -43,6 +43,12 @@ namespace DataAccessLayer.Concrete.EntityFramework
             return _mapper.Map<List<ResultCardDto>>(value);
         }
 
+        public List<ResultCardDto> GetListByAccount(int id)
+        {
+           var value=_context.Cards.Where(x=>x.Id== id).ToList();
+            return _mapper.Map<List<ResultCardDto>>(value);
+        }
+
         public void Insert(CreateCardDto t)
         {
             var value = _mapper.Map<Card>(t);

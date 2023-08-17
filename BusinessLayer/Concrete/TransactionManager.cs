@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
-using DTOLayer.DTOs.Transaction;
+using DTOLayer.DTOs.TransactionDto;
+using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -34,14 +35,14 @@ namespace BusinessLayer.Concrete
             return _transactionDal.GetListAll();
         }
 
-        public List<ResultTransactionDto> TGetTransactionByAccountID(string accountNumber)
+        public List<Transaction> TGetTransactionByAccountNumber(string accountNumber)
         {
-            return _transactionDal.GetTransactionByAccountID(accountNumber);
+            return _transactionDal.GetTransactionByAccountNumber(accountNumber);
         }
 
         public void TInsert(CreateTransactionDto t)
         {
-           _transactionDal.Insert(t);
+            _transactionDal.Insert(t);
         }
 
         public void TUpdate(UpdateTransactionDto t)

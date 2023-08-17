@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DTOLayer.DTOs.Card;
-using DTOLayer.DTOs.Transaction;
+using DTOLayer.DTOs.TransactionDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,10 +17,10 @@ namespace BankAPI.Controllers
             _transactionService = transactionService;
         }
 
-        [HttpGet]
-        public IActionResult TransactionListByAccount(string accountNumber)
+        [HttpGet("TransactionListByAccountNumber")]
+        public IActionResult TransactionListByAccountNumber(string accountNumber)
         {
-            var values = _transactionService.TGetTransactionByAccountID(accountNumber);
+            var values = _transactionService.TGetTransactionByAccountNumber(accountNumber);
             return Ok(values);
         }
 
@@ -52,5 +52,7 @@ namespace BankAPI.Controllers
             _transactionService.TUpdate(updateTransactionDto);
             return Ok();
         }
+
+
     }
 }

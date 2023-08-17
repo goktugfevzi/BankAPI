@@ -37,6 +37,9 @@ namespace BankAPI.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto registerUser)
         {
+            Random rnd = new Random();
+            int number = rnd.Next(40000000, 60000000);
+            string accountNumber = number.ToString();
             //Check User Exist 
             var userExist = await _userManager.FindByEmailAsync(registerUser.Email);
             if (userExist != null)
@@ -51,7 +54,11 @@ namespace BankAPI.Controllers
                 FirstName = registerUser.FirstName,
                 LastName = registerUser.LastName,
                 ConfirmCode = 1,
-
+                AccountNumber = accountNumber,
+                AccountName = "EnterBankX",
+                Balance = 0,
+                CreatedAt = DateTime.Now,
+                Address = "Pursaklar / Ankara",
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = registerUser.UserName,
             };
@@ -113,23 +120,6 @@ namespace BankAPI.Controllers
 
             return token;
         }
-        [HttpPost]
-        [Route("confirmCode/{id}")]
-        public async Task<IActionResult> ConfirmCode(int id)
-        {
-            //Random random = new Random();
-            //int confirmCode = random.Next(100000, 1000000);
-            //var user = await _userManager.FindByIdAsync(id.ToString());
-            //if (user != null)
-            //{
-            //    user.ConfirmCode = confirmCode;
-            //    await _userManager.UpdateAsync(user);
-            //    return Ok("ConfirmCode oluşturuldu ve yönlendiriliyor...");
-            //}
-            return BadRequest($"{id} ID ye sahip üye yok!");
-        }
-        [HttpPost]
-
 
         [HttpPost]
         [Route("logout")]
@@ -155,9 +145,10 @@ namespace BankAPI.Controllers
             }
             return BadRequest("Couldnot send link to email, please try again");
         }
+
         [HttpPost]
         [AllowAnonymous]
-        [Route("reset-password")]
+        [Route("~/ChangePassword")]
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
@@ -178,42 +169,70 @@ namespace BankAPI.Controllers
         }
 
 
-        [HttpGet("reset-password")]
+        [HttpGet("~/ChangePassword")]
         public async Task<IActionResult> ResetPassword(string token, string email)
         {
-            var model = new ResetPasswordDto { Token = token, Email = email };
-            return Ok(new { model });
+            return RedirectToAction("Index", "ChangePassword", new { token, email });
         }
 
-        [HttpGet]
-        public IActionResult TestEmail(int amount, DateTime time)
-        {
 
-            Random random = new Random();
-            int confirmCode = random.Next(100000, 1000000);
-            var message = new Message(new string[] { "goktugfevziozcelik@gmail.com" }, "PARA GONDERME ISLEMI", $"SIFRENIZI PAYLASMAYINIZ. {time} TARIHLI {amount} MIKTARINDA PARAYI GONDERMEK ICIN 3D SECURE SIFRENIZ: {confirmCode}. GUVENLIGINIZ ICIN BU SIFREYI BANKA PERSONELI DAHIL KIMSEYLE PAYLASMAYIN. KEYIFLI GUNLER DILERIZ..");
+        [HttpPost]
+        [Route("EmailSend")]
+        public IActionResult EmailSend(SendMailDto sendMailDto)
+        {
+            var message = new Message(new string[] { sendMailDto.email }, sendMailDto.subject, sendMailDto.text);
             _emailService.SendEmail(message);
             return Ok("Mail gönderildi");
         }
 
-        //[HttpGet("ConfirmEmail")]
-        //public async Task<IActionResult> ConfirmEmail(string token, string email)
-        //{
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user != null)
-        //    {
-        //        var result = await _userManager.ConfirmEmailAsync(user, token);
-        //        if (result.Succeeded)
-        //        {
-        //            return Ok("Email Verified Successfully");
-
-        //        }
-        //    }
-        //    return BadRequest("This User Doesnot exist!");
-        //}
 
 
+        [HttpPost]
+        [Route("ChangePasswordNew")]
+        public async Task<IActionResult> ChangePasswordNew([FromBody] ChangePasswordNewDto changePasswordDto)
+        {
 
+
+            var user = await _userManager.FindByIdAsync(changePasswordDto.Id);
+
+            if (user != null)
+            {
+                var changePasswordResult = await _userManager.ChangePasswordAsync(user, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+
+                if (changePasswordResult.Succeeded)
+                {
+                    return Ok("Password changed successfully");
+                }
+                else
+                {
+                    return BadRequest("Password change failed");
+                }
+            }
+
+            return NotFound("User not found");
+        }
 
     }
+
+
+    //[HttpGet("ConfirmEmail")]
+    //public async Task<IActionResult> ConfirmEmail(string token, string email)
+    //{
+    //    var user = await _userManager.FindByEmailAsync(email);
+    //    if (user != null)
+    //    {
+    //        var result = await _userManager.ConfirmEmailAsync(user, token);
+    //        if (result.Succeeded)
+    //        {
+    //            return Ok("Email Verified Successfully");
+
+    //        }
+    //    }
+    //    return BadRequest("This User Doesnot exist!");
+    //}
+
+
+
+
 }
+

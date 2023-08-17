@@ -15,8 +15,6 @@ namespace BusinessLayer.Container
     {
         public static void ContainerDependencies(this IServiceCollection services)
         {
-            services.AddScoped<IAccountService, AccountManager>();
-            services.AddScoped<IAccountDal, EFAccountDal>();
 
             services.AddScoped<IBillService, BillManager>();
             services.AddScoped<IBillDal, EFBillDal>();

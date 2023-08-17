@@ -1,4 +1,4 @@
-﻿
+﻿@model List<DTOLayer.DTOs.Card.ResultCardDto>
 @{
     ViewData["Title"] = "MyCards";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -12,34 +12,40 @@
            Kredi Kartlarım
         </h3>
         <div class="row">
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="account-card account-card-primary text-white rounded p-3 mb-4 mb-lg-0">
-                    <p class="text-4">XXXX-XXXX-XXXX-8943</p>
-                    <p class="d-flex align-items-center">
-                        <span class="account-card-expire text-uppercase d-inline-block opacity-6 mr-2">
-                            Valid<br>
-                            thru<br>
-                        </span> <span class="text-4 opacity-9">04/28</span> 
-                    </p>
-                    <p class="d-flex align-items-center m-0"><span class="text-uppercase font-weight-500">Furkan UĞUR</span> <img class="ml-auto" src="bank-template/images/visa.png" alt="visa" title=""></p>
-                    <div class="account-card-overlay rounded"><a href="#" data-target="#edit-card-details" data-toggle="modal" class="text-light btn-link mx-2"><span class="mr-1"><i class="fas fa-edit"></i></span>Düzenle</a> <a href="#" class="text-light btn-link mx-2"><span class="mr-1"><i class="fas fa-minus-circle"></i></span>Sil</a></div>
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="account-card account-card-primary text-white rounded p-3 mb-4 mb-lg-0">
+                        <p id="cardNumber" class="text-4">@item.CardNumber</p>
+                        <p class="d-flex align-items-center">
+                            <span class="account-card-expire text-uppercase d-inline-block opacity-6 mr-2">
+                                SKT<br>                               
+                            </span> <span class="text-4 opacity-9">@item.ExpiryMonth/@item.ExpiryYear</span>
+                        </p>
+                        <p class="d-flex align-items-center m-0"><span id="holderName" class="text-uppercase font-weight-500">@item.HolderName</span>
+                            @if (item.CardType == "Visa")
+                            {
+                                <img class="ml-auto" src="~/bank-template/images/visa.png" alt="visa" title="">
+                            }
+                            @if (item.CardType == "MasterCard")
+                            {
+                                <img class="ml-auto" src="~/bank-template/images/mastercard.png" alt="visa" title="">
+                            }
+                        </p>
+
+                        <div class="account-card-overlay rounded">
+                            <a href="#" id="BtnCardDetail" data-month="@item.ExpiryMonth" data-year="@item.ExpiryYear" data-cvv="@item.CardCvc" data-holder="@item.HolderName" data-cardnumber="@item.CardNumber" data-cardtype="@item.CardType" data-cardid="@item.CardId" class="text-light btn-link mx-2">
+                                <span class="mr-1">
+                            <i class="fas fa-edit"></i></span>Düzenle</a>
+                            <a href="/User/DeleteCards/@item.CardId" class="text-light btn-link mx-2">
+                            <span class="mr-1"><i class="fas fa-minus-circle"></i></span>Sil</a></div>
+                    </div>
                 </div>
-            </div>
+            }
+            
+            
             <div class="col-12 col-sm-6 col-lg-4">
-                <div class="account-card text-white rounded p-3 mb-4 mb-lg-0">
-                    <p class="text-4">XXXX-XXXX-XXXX-2345</p>
-                    <p class="d-flex align-items-center">
-                        <span class="account-card-expire text-uppercase d-inline-block opacity-6 mr-2">
-                            Valid<br>
-                            thru<br>
-                        </span> <span class="text-4 opacity-9">07/23</span>
-                    </p>
-                    <p class="d-flex align-items-center m-0"><span class="text-uppercase font-weight-500">Fezvi ÖZÇELİK</span> <img class="ml-auto" src="bank-template/images/mastercard.png" alt="mastercard" title=""></p>
-                    <div class="account-card-overlay rounded"><a href="#" data-target="#edit-card-details" data-toggle="modal" class="text-light btn-link mx-2"><span class="mr-1"><i class="fas fa-edit"></i></span>Düzenle</a> <a href="#" class="text-light btn-link mx-2"><span class="mr-1"><i class="fas fa-minus-circle"></i></span>Sil</a></div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-lg-4">
-                <a href="" data-target="#add-new-card-details" data-toggle="modal" class="account-card-new d-flex align-items-center rounded h-100 p-3 mb-4 mb-lg-0">
+                <a href="#" id="BtnCardAdd" class="account-card-new d-flex align-items-center rounded h-100 p-3 mb-4 mb-lg-0">
                     <p class="w-100 text-center line-height-4 m-0">
                         <span class="text-3"><i class="fas fa-plus-circle"></i></span> <span class="d-block text-body text-3">Yeni Kart Ekle</span>
                     </p>
@@ -57,42 +63,57 @@
                 </div>
                 <div class="modal-body p-4">
                     <form id="updateCard" method="post">
+                        <input name="CardType" id="CardType" type="hidden">
+                        <input name="CardId" id="CardId" type="hidden">
                         <div class="form-group">
                             <label for="edircardNumber">Kart Numarası</label>
                             <div class="input-group">
-                                <div class="input-group-prepend"><span class="input-group-text"><img class="ml-auto" src="images/visa.png" alt="visa" title=""></span></div>
-                                <input type="text" class="form-control" data-bv-field="edircardNumber" id="edircardNumber" disabled="" value="XXXXXXXXXXXX1243" placeholder="Card Number">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <img id="cardlogo" class="ml-auto" src="~/bank-template/images/visa.png" alt="visa" title="">
+                                    </span>
+                                </div>
+                                <input name="CardNumber" id="UpdateCardNumber" type="text" class="form-control" data-bv-field="edircardNumber"  />
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="editexpiryDate">SKT</label>
-                                    <input id="editexpiryDate" type="text" class="form-control" data-bv-field="editexpiryDate" required="" value="04/26" placeholder="MM/YY">
+                                    <label for="expiryDate">SKT/MM</label>
+                                    <input name="ExpiryMonth" id="expiryMonth" type="text" class="form-control" data-bv-field="expiryDate" required="" placeholder="MM/YY">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="editcvvNumber">CVV <span class="text-info ml-1" data-toggle="tooltip" data-original-title="For Visa/Mastercard, the three-digit CVV number is printed on the signature panel on the back of the card immediately after the card's account number. For American Express, the four-digit CVV number is printed on the front of the card above the card account number."><i class="fas fa-question-circle"></i></span></label>
-                                    <input id="editcvvNumber" type="password" class="form-control" data-bv-field="editcvvNumber" required="" value="321" placeholder="CVV (3 digits)">
+                                    <label for="expiryDate">SKT/YY</label>
+                                    <input name="ExpiryYear" id="expiryYear" type="text" class="form-control" data-bv-field="expiryDate" required=""  placeholder="MM/YY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="editcvvNumber">CVV <span class="text-info ml-1" data-toggle="tooltip" data-original-title="Kartınızın arka yüzündeki 3 haneli rakam."><i class="fas fa-question-circle"></i></span></label>
+                                    <input name="CardCvc" id="editcvvNumber" type="text" class="form-control" data-bv-field="editcvvNumber" required="" placeholder="CVV (3 digits)">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="editcardHolderName">Kart Sahibi</label>
-                            <input type="text" class="form-control" data-bv-field="editcardHolderName" id="editcardHolderName" required="" value="Furkan UĞUR" placeholder="Card Holder Name">
+                            <input type="text" name="HolderName" class="form-control" id="UpdateHolderName" data-bv-field="editcardHolderName" required="" placeholder="Kart Sahibi">
                         </div>
-                        <button class="btn btn-default btn-center btn-block">
+                       @* <button class="btn btn-default btn-center btn-block">
                             <span class="bh"></span>
                             <span>Güncelle</span>
-                        </button>
+                        </button>*@
+                        <a id="BtnUpdateCard" class="btn btn-default btn-center btn-block">Güncelle</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+   
     <!-- Add New Card Details Modal
     ================================== -->
+
     <div id="add-new-card-details" class="modal fade" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -101,38 +122,41 @@
                     <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body p-4">
-                    <form id="addCard" method="post">                       
+                    <form method="post">                       
                         <div class="form-group">
-                            <label for="cardType">Kart Tipi</label>
-                            <select id="cardType" class="custom-select" required="">
-                                <option value="">Card Type</option>
+                            <label for="cardType">Kart Tipi Seçin</label>
+                            <select name="CardType" id="cardType" class="custom-select" required="">                               
                                 <option>Visa</option>
                                 <option>MasterCard</option>
-                                <option>American Express</option>
-                                <option>Discover</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="cardNumber">Kart Numarası</label>
-                            <input type="text" class="form-control" data-bv-field="cardnumber" id="cardNumber" required="" value="" placeholder="Card Number">
+                            <label for="CardNumber">Kart Numarası</label>
+                            <input name="CardNumber" readonly type="text" class="form-control" data-bv-field="cardnumber" id="cardNumber" required="" value="" placeholder="Card Number">
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="expiryDate">SKT</label>
-                                    <input id="expiryDate" type="text" class="form-control" data-bv-field="expiryDate" required="" value="" placeholder="MM/YY">
+                                    <label for="expiryDate">SKT/MM</label>
+                                    <input name="ExpiryMonth" readonly id="month" type="text" class="form-control" data-bv-field="expiryDate"   placeholder="MM">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="cvvNumber">CVV <span class="text-info ml-1" data-toggle="tooltip" data-original-title="For Visa/Mastercard, the three-digit CVV number is printed on the signature panel on the back of the card immediately after the card's account number. For American Express, the four-digit CVV number is printed on the front of the card above the card account number."><i class="fas fa-question-circle"></i></span></label>
-                                    <input id="cvvNumber" type="password" class="form-control" data-bv-field="cvvnumber" required="" value="" placeholder="CVV (3 rakam)">
+                                    <label for="expiryDate">SKT/YY</label>
+                                    <input name="ExpiryYear" readonly id="year" type="text" class="form-control" data-bv-field="expiryDate"   placeholder="YY">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="cvvNumber">CVV <span class="text-info ml-1" data-toggle="tooltip" data-original-title="Kartınızın arka yüzündeki 3 haneli rakam."><i class="fas fa-question-circle"></i></span></label>
+                                    <input name="CardCvc" readonly id="cvvNumber" type="text" class="form-control" data-bv-field="cvvnumber" required="" value="" placeholder="CVV (3 rakam)">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="cardHolderName">Kart Sahibinin Adı</label>
-                            <input type="text" class="form-control" data-bv-field="cardholdername" id="cardHolderName" required="" value="" placeholder="Card Holder Name">
+                            <input name="HolderName"  type="text" readonly class="form-control" data-bv-field="cardholdername" id="cardHolderName" required="" value="" placeholder="Kart Sahibi">
                         </div>
                         <button class="btn btn-default btn-center btn-block">
                             <span class="bh"></span>

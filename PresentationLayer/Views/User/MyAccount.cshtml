@@ -1,4 +1,4 @@
-﻿
+﻿@model EntityLayer.Concrete.User
 @{
     ViewData["Title"] = "MyAccount";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -13,16 +13,16 @@
         <a href="#edit-personal-details" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-personal-details"><i class="fas fa-edit mr-1"></i>Güncelle</a>
         <div class="row">
             <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Adı</p>
-            <p class="col-sm-9">Furkan UĞUR</p>
+            <p class="col-sm-9">@Model.FirstName @Model.LastName</p>
         </div>
         <div class="row">
             <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Doğum Yılı</p>
-            <p class="col-sm-9">01-12-2000</p>
+            <p class="col-sm-9">1993</p>
         </div>
         <div class="row">
             <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Adres</p>
             <p class="col-sm-9">
-                Ankara Pursaklar
+                @Model.Address
             </p>
         </div>
 
@@ -34,33 +34,29 @@
                         <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body p-4">
-                        <form id="personaldetails" method="post">
+                        <form id="personaldetails" action="@Url.Action("NameAction", "User")" method="post">
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="firstName">Adınız</label>
-                                        <input type="text" value="Furkan" class="form-control" data-bv-field="firstName" id="firstName" required="" placeholder="Adınızı Girin">
+                                        <input type="text" value="@Model.FirstName" class="form-control" name="firstName" id="firstName" required="" placeholder="Adınızı Girin">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="firstName">Soyadınız</label>
+                                        <input type="text" value="@Model.LastName" class="form-control" name="LastName" id="LastName" required="" placeholder="Adınızı Girin">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="birthDate">Doğum Yılı</label>
+                                        <label for="birthDate">Adres</label>
                                         <div class="position-relative">
-                                            <input id="birthDate" value="01-12-2000" type="text" class="form-control" required="" placeholder="Doğum Yılı">
+                                            <input id="birthDate" value="@Model.Address" type="text" class="form-control" name="Address" required="" placeholder="Doğum Yılı">
                                             <span class="icon-inside"><i class="fas fa-calendar-alt"></i></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <h3 class="text-5 font-weight-400 mt-3">Adres</h3>
-                                    <hr>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <input type="text" value="Ankara Merkez" class="form-control" data-bv-field="address" id="address" required="" placeholder="Adresinizi Girin">
-                                    </div>
-                                </div>                                                            
                             </div>
                             <button class="btn btn-primary btn-block mt-2" type="submit">
                                 Güncelle
@@ -73,13 +69,12 @@
     </div>
     <!-- Edit Details Modal  -->
     <!-- Personal Details End -->
- 
     <!-- Email Addresses  -->
     <div class="bg-light shadow-sm rounded infoItems">
         <a href="#edit-email" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-email"><i class="fas fa-edit mr-1"></i>Güncelle</a>
         <div class="row">
             <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Mail Adresi</p>
-            <p class="col-sm-9">deneme@gmail.com</p>
+            <p class="col-sm-9">@Model.Email</p>
         </div>
         <div id="edit-email" class="accord">
             <div class="">
@@ -89,12 +84,13 @@
                         <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body p-4">
-                        <form id="emailAddresses" method="post">
+                        <form id="email" action="@Url.Action("EmailAction", "User")" method="post">
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="emailID">Mail Adresi</label>
-                                        <input type="text" value="deneme@gmail.com" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Mail adresi">
+                                        <input type="text" value="@Model.Email" class="form-control" name="Email" id="Email" required="" placeholder="Mail adresi">
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +107,7 @@
         <a href="#edit-phone" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="edit-phone"><i class="fas fa-edit mr-1"></i>Güncelle</a>
         <div class="row">
             <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">Telefon Numarası</p>
-            <p class="col-sm-9">+90 507 099 41 61</p>
+            <p class="col-sm-9">+@Model.PhoneNumber</p>
         </div>
         <div id="edit-phone" class="accord">
             <div class="">
@@ -121,12 +117,12 @@
                         <button type="button" class="close font-weight-400" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body p-4">
-                        <form id="phone" method="post">
+                        <form id="phone" action="@Url.Action("PhoneNumberAction", "User")" method="post">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="mobileNumber">Telefon Numarası</label>
-                                        <input type="text" value="+90 507 099 41 61" class="form-control" data-bv-field="mobilenumber" id="mobileNumber" required="" placeholder="Telefon Numarası">
+                                        <input type="text" maxlength="11" value="@Model.PhoneNumber" class="form-control" name="Phone" id="mobileNumber" required="" placeholder="Telefon Numarası">
                                     </div>
                                 </div>
                             </div>
@@ -158,18 +154,18 @@
                     </div>
 
                     <div class="modal-body">
-                        <form id="changePassword" method="post">
-                            <div class="form-group">                                
-                                <input type="text" class="form-control" data-bv-field="existingpassword" id="existingPassword" required="" placeholder="Mevcut Şifrenizi Girin">
+                        <form id="changePassword" action="@Url.Action("PasswordChangeAction", "User")" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="oldPassword" id="existingPassword" required="" placeholder="Mevcut Şifrenizi Girin">
                             </div>
-                            <div class="form-group">                                
-                                <input type="text" class="form-control" data-bv-field="newpassword" id="newPassword" required="" placeholder="Enter Yeni Şifrenizi Girin">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="newPassword" id="newPassword" required="" placeholder="Enter Yeni Şifrenizi Girin">
                             </div>
-                            <div class="form-group">                               
-                                <input type="text" class="form-control" data-bv-field="confirmgpassword" id="confirmPassword" required="" placeholder="Yeni Şifrenizi Tekrar Girin">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="confirmPassword" id="confirmPassword" required="" placeholder="Yeni Şifrenizi Tekrar Girin">
                             </div>
                             <button class="btn btn-primary btn-block mt-4" type="submit">
-                               Güncelle
+                                Güncelle
                             </button>
                         </form>
                     </div>

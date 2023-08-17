@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
-using DTOLayer.DTOs.Transaction;
+using DTOLayer.DTOs.TransactionDto;
 using DTOLayer.DTOs.TransactionType;
 using EntityLayer.Concrete;
 using System;

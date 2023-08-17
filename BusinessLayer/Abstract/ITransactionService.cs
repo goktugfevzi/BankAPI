@@ -1,4 +1,4 @@
-﻿using DTOLayer.DTOs.Transaction;
+﻿using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,6 @@ namespace BusinessLayer.Abstract
         void TUpdate(UpdateTransactionDto t);
         ResultTransactionDto TGetById(int id);
         List<ResultTransactionDto> TGetListAll();
-        List<ResultTransactionDto> TGetTransactionByAccountID(string accountNumber);
+        List<Transaction> TGetTransactionByAccountNumber(string accountNumber);
     }
 }
