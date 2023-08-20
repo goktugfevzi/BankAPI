@@ -24,6 +24,13 @@ namespace BankAPI.Controllers
             return Ok(values);
         }
 
+        [HttpGet("TransactionByAccountNumber")]
+        public IActionResult TransactionByAccountNumber(string accountNumber)
+        {
+            var values = _transactionService.TGetTransaction(accountNumber);
+            return Ok(values);
+        }
+
         [HttpPost]
         public IActionResult AddTransaction(CreateTransactionDto createTransactionDto)
         {

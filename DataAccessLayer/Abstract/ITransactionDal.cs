@@ -20,7 +20,8 @@ namespace DataAccessLayer.Abstract
         List<Transaction> GetTransactionByAccountNumber(string AccountNumber);
         void Deposit(DepositDto depositDto);
         void SendMoney(SendMoneyDto sendMoneyDto);
-
+        string CheckSendMoney(SendMoneyDto sendMoneyDto);
+        User GetTransaction(string accountNumber);
 
     }
 }

@@ -19,5 +19,7 @@ namespace BusinessLayer.Abstract
         List<Transaction> TGetTransactionByAccountNumber(string accountNumber);
         void TDeposit(DepositDto depositDto); 
         void TSendMoney(SendMoneyDto sendMoneyDto);
+        string CheckSendMoney(SendMoneyDto sendMoneyDto);
+        User TGetTransaction(string accountNumber);
     }
 }

@@ -5,6 +5,7 @@ using DTOLayer.DTOs.Card;
 using DTOLayer.DTOs.Operations;
 using DTOLayer.DTOs.TransactionDto;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,37 @@ namespace DataAccessLayer.Concrete.EntityFramework
     public class EFTransactionDal : ITransactionDal
     {
         private readonly BankContext _context;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper; 
+        private readonly UserManager<User> _userManager;
 
-        public EFTransactionDal(BankContext context, IMapper mapper)
+        public EFTransactionDal(BankContext context, IMapper mapper, UserManager<User> userManager)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
+
+        public string CheckSendMoney(SendMoneyDto sendMoneyDto)
+        {
+            var price = _context.Users.Where(x => x.AccountNumber == sendMoneyDto.SenderAccountNumber).Select(z => z.Balance).FirstOrDefault();
+            if (price > sendMoneyDto.Amount)
+            {
+                var user = _context.Users.Where(x => x.AccountNumber == sendMoneyDto.ReceiverAccountNumber).FirstOrDefault();
+                if (user != null)
+                {
+                    return "Başarılı İşlem";
+                }
+                else
+                {
+                    return "Hesap Bulunamadı";
+                }
+            }
+            else
+            {
+                return "Yetersiz Bakiye";
+            }
+        }                    
+        
 
         public void Delete(ResultTransactionDto t)
         {
@@ -49,6 +74,12 @@ namespace DataAccessLayer.Concrete.EntityFramework
         {
             var value = _context.Transactions.ToList();
             return _mapper.Map<List<ResultTransactionDto>>(value);
+        }
+
+        public User GetTransaction(string accountNumber)
+        {
+            var value = _context.Users.FirstOrDefault(x => x.AccountNumber == accountNumber);
+            return value;
         }
 
         public List<Transaction> GetTransactionByAccountNumber(string accountnumber)

@@ -34,9 +34,9 @@ namespace PresentationLayer.Controllers
             {
                 HttpContext.Session.SetString("UserName", loginUserDto.UserName);
                 var userm = await _userManager.FindByNameAsync(loginUserDto.UserName);
-                HttpContext.Session.SetInt32("userid", userm.Id);              
-                return RedirectToAction("Index", "Default");
-                //return RedirectToAction("Index", "Confirm");
+                HttpContext.Session.SetInt32("userid", userm.Id);
+                //return RedirectToAction("Index", "Default");
+                return RedirectToAction("Index", "Confirm");
             }
             ViewBag.Error = "Kullanıcı adı veya şifre hatalı";
             return View();

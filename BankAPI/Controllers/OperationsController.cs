@@ -46,6 +46,13 @@ namespace BankAPI.Controllers
             return Ok("Para Gönderme İşlemi Başarılı");
         }
 
+        [HttpPost("CheckSendMoney")]
+        public IActionResult CheckSendMoney(SendMoneyDto sendMoneyDto)
+        {
+            var value=_transactionService.CheckSendMoney(sendMoneyDto);
+            return Ok(value);
+        }
+
 
 
         [HttpPost("PayBill")]

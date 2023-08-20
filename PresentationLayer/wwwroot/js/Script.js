@@ -117,9 +117,9 @@ $(document).on('touchstart click', '#payBillButton', function () {
 
 //// Input alanına her yazıldığında tetiklenecek fonksiyon
 //inputElement.addEventListener('input', function () {
-//    var enteredAmount = parseFloat(inputElement.value.replace(',', '.')); 
+//    var enteredAmount = parseFloat(inputElement.value.replace(',', '.'));
 //    var yatirilacakMiktar = enteredAmount.toFixed(2);
-//    yatirilacakMiktarElement.textContent = yatirilacakMiktar + ' TRY'; 
+//    yatirilacakMiktarElement.textContent = yatirilacakMiktar + ' TRY';
 //});
 
 
@@ -134,6 +134,59 @@ $(document).on('touchstart click', '#payBillButton', function () {
 //    toplamtutar.textContent = toplam + ' TRY';
 //});
 
+$(document).on('touchstart click', '#BtnSendMoney', function () {
+    var formData = $("#FrmSendMoney").serialize();
+    $.ajax({
+        type: "POST",
+        url: "/Transaction/SendMoney",
+        data: formData,
+        success: function (data) {
+            if (data.uygun==false) {
+                swal({
+                    title: "Yetersiz Bakiye",
+                    text: "Bakiyenizi Kontrol Edin !",
+                    icon: "error",
+                    buttons: {
+                        tamam: "Tamam",
+                    },
+                });
+            }
+            else {
+                if (data.sonuc) {
+                    swal({
+                        title: "Başarılı İşlem",
+                        text: "Eft/Havale İşlemi Başarılı Bir Şekilde Gerçekleşti",
+                        icon: "success",
+                        buttons: {
+                            tamam: "Tamam",
+                        },
+                    }).then((value) => {
+                        switch (value) {
+                            case "tamam":
+                                window.location.href = "/Default/Index/"
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: "Hesap Numarası Hatalı",
+                        text: "Lütfen Geçerli Bir Hesap Numarası Girin!",
+                        icon: "error",
+                        buttons: {
+                            tamam: "Tamam",
+                        },
+                    });
+                }
+            }
+        },
+        error: function () {
+            swal("Hata", "Kart Numarası Oluşturulurken Bir Hata Oluştu", "error");
+        }
+    });
+});
 
 
 

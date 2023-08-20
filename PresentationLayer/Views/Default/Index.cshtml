@@ -51,7 +51,22 @@
                     
                     <td>@Convert.ToDateTime(item.TransactionDate).ToString("dd/MM/yyyy")</td>
                     <td>@item.TransactionType.TransactionTypeName</td>
-                    <td>@item.Amount ₺</td>
+                    @if (item.TransactionTypeID == 1)
+                    {
+                        <td style="color:green">+@item.Amount ₺</td>
+                    }
+                    else if (item.TransactionTypeID == 3)
+                    {
+                        <td style="color:red">-@item.Amount ₺</td>
+                    }
+                    else if (item.TransactionTypeID == 2 && item.SenderAccountNumber==Model.user.AccountNumber)
+                    {
+                        <td style="color:red">-@item.Amount ₺</td>
+                    }
+                    else if (item.TransactionTypeID == 2 && item.SenderAccountNumber != Model.user.AccountNumber)
+                    {
+                        <td style="color:green">+@item.Amount ₺</td>
+                    }
                 </tr>
             }
 

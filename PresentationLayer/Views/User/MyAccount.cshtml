@@ -50,10 +50,9 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="birthDate">Adres</label>
+                                        <label for="Address">Adres</label>
                                         <div class="position-relative">
-                                            <input id="birthDate" value="@Model.Address" type="text" class="form-control" name="Address" required="" placeholder="Doğum Yılı">
-                                            <span class="icon-inside"><i class="fas fa-calendar-alt"></i></span>
+                                            <input type="text" value="@Model.Address" class="form-control" name="Address" id="Address" required="" placeholder="Adınızı Girin">
                                         </div>
                                     </div>
                                 </div>
@@ -135,6 +134,23 @@
     </div>
     <!-- Phone End -->
     <!-- Security -->
+    <div class="bg-light shadow-sm rounded infoItems">
+        <a class="float-right text-1 text-uppercase text-muted btn-link pbtn">Hesap Numarası</a>
+        <div class="row">
+            <p class="col-sm-3 text-muted text-sm-right mb-0 mb-sm-3">
+                <label class="col-form-label">@Model.AccountName</label>
+            </p>
+            <p class="col-sm-9">
+                <input type="text" class="form-control-plaintext" data-bv-field="password" id="password" value="@Model.AccountNumber" readonly>
+            </p>
+        </div>
+    </div>
+
+
+
+
+
+
     <div class="bg-light shadow-sm rounded infoItems">
         <a href="#change-password" class="float-right text-1 text-uppercase text-muted btn-link pbtn" data-id="change-password"><i class="fas fa-edit mr-1"></i>Güncelle</a>
         <div class="row">

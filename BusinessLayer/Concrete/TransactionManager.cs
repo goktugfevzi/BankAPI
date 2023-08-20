@@ -21,6 +21,16 @@ namespace BusinessLayer.Concrete
             _transactionDal = transactionDal;
         }
 
+        public string CheckSendMoney(SendMoneyDto sendMoneyDto)
+        {
+            return _transactionDal.CheckSendMoney(sendMoneyDto);
+        }
+
+        public User TGetTransaction(string accountNumber)
+        {
+            return _transactionDal.GetTransaction(accountNumber);
+        }
+
         public void TDelete(ResultTransactionDto t)
         {
             _transactionDal.Delete(t);
